@@ -3,12 +3,13 @@ name: 🚀 deploy to remote
 on:
   push:
     branches:
-      - prod
+      - production
 
 jobs:
   deploy:
-    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
@@ -16,4 +17,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./src/
-          server-dir: brightful.net/public_html/
+          server-dir: public_html/
