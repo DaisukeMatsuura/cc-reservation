@@ -1,0 +1,29 @@
+name: 🚀 deploy to remote
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 🚚 setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: 🔨build project
+        run: cd src && yarn install && yarn build
+      - name: 🎉 List output files
+        run: ls -a
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: sv7353.xserver.jp
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./src/
+          server-dir: brightful.net/public_html/
