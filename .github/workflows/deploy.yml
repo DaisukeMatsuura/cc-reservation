@@ -10,15 +10,6 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: 🚚 setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: 🔨build project
-        run: cd src && yarn install && yarn build
-      - name: 🎉 List output files
-        run: ls -a
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
