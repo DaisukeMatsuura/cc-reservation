@@ -8,7 +8,6 @@ on:
 jobs:
   deploy:
     name: FTP-Deploy-Action
-    runs-on: ubuntu-latest
     steps:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
