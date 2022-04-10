@@ -22,7 +22,7 @@ Route::controller(RegisterController::class)->group(function(){
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('register', 'register');
+    // Route::post('register', 'register');
 
     // テスト
     Route::get('/test', function () {
