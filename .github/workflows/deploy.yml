@@ -1,6 +1,7 @@
 name: 🚀 deploy to remote
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - production
@@ -8,13 +9,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
-          server: sv7353.xserver.jp
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./src/
-          server-dir: public_html/
+          php-version: '8.0'
+      - uses: actions/checkout@v3
+      - name: Copy .env
+        run: cd ./src/ && php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: ls
+        run: ls -a
