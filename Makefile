@@ -9,7 +9,7 @@ down:
 destroy:
 	docker compose down --rmi all --volumes --remove-orphans
 web:
-	docker compose exec web ash
+	docker compose exec web bash
 app:
 	docker compose exec app bash
 db:
