@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Public Routes
+Route::controller(RegisterController::class)->group(function(){
+    Route::post('login', 'login');
+});
+
+// Protected Routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('register', 'register');
+
+    // テスト
+    Route::get('/test', function () {
+        return response()->json([
+            'message' => 'Authenticated',
+        ], 200);
+    });
 });
